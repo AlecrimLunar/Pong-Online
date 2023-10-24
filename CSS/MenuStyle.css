@@ -1,0 +1,20 @@
+.root{
+    -fx-background-color: BLACK;
+}
+
+.label{
+    -fx-alignment: center;
+}
+
+.button {
+    -fx-background-color: BLACK;
+    -fx-border-radius: 12px;
+    -fx-border-color: WHITE;
+    -fx-text-fill: WHITE;
+    -fx-text-align: center;
+    -fx-font-size: 36px;
+}
+
+#Title{
+    -fx-text-fill: WHITE;
+}
