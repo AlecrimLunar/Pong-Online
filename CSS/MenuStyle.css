@@ -4,6 +4,7 @@
 
 .label{
     -fx-alignment: center;
+    -fx-font-family: Verdana;
 }
 
 .button {
@@ -12,7 +13,7 @@
     -fx-border-color: WHITE;
     -fx-text-fill: WHITE;
     -fx-text-align: center;
-    -fx-font-size: 36px;
+    -fx-font-size: 40px;
 }
 
 #Title{

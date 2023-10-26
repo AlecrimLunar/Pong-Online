@@ -1,5 +1,6 @@
-package FXML;
+package FXML.Controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,5 +16,9 @@ public class MenuController {
     void EscreveCU(ActionEvent e){
         Title.setText(Title.getText()+" CU");
     }
-    
+
+    @FXML
+    void Sair(ActionEvent e){
+        Platform.exit();
+    }
 }
