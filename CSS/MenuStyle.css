@@ -19,3 +19,13 @@
 #Title{
     -fx-text-fill: WHITE;
 }
+
+#Vce{
+    -fx-text-fill: WHITE;
+    -fx-font-size: 50px;
+}
+
+#ou{
+    -fx-color: WHITE;
+    -fx-font-size: 50px;
+}

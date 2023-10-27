@@ -1,24 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="654.0" layoutY="257.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="194.0" text="Client">
+      <Rectangle arcWidth="5.0" fill="WHITE" height="175.0" layoutX="14.0" layoutY="409.0" stroke="WHITE" strokeType="INSIDE" width="19.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcWidth="5.0" fill="WHITE" height="175.0" layoutX="1327.0" layoutY="69.0" stroke="WHITE" strokeType="INSIDE" width="19.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcWidth="5.0" fill="WHITE" height="27.0" layoutY="-6.0" stroke="WHITE" strokeType="INSIDE" width="1360.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcWidth="5.0" fill="WHITE" height="27.0" layoutY="748.0" stroke="WHITE" strokeType="INSIDE" width="1360.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="76.0" layoutX="677.0" layoutY="31.0" stroke="WHITE" strokeType="INSIDE" width="7.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="76.0" layoutX="677.0" layoutY="480.0" stroke="WHITE" strokeType="INSIDE" width="7.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="76.0" layoutX="677.0" layoutY="391.0" stroke="WHITE" strokeType="INSIDE" width="7.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="76.0" layoutX="677.0" layoutY="297.0" stroke="WHITE" strokeType="INSIDE" width="7.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="76.0" layoutX="677.0" layoutY="206.0" stroke="WHITE" strokeType="INSIDE" width="7.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="76.0" layoutX="677.0" layoutY="119.0" stroke="WHITE" strokeType="INSIDE" width="7.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="76.0" layoutX="677.0" layoutY="570.0" stroke="WHITE" strokeType="INSIDE" width="7.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="76.0" layoutX="677.0" layoutY="660.0" stroke="WHITE" strokeType="INSIDE" width="7.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Button layoutX="583.0" layoutY="190.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="194.0" text="Client">
          <font>
             <Font size="40.0" />
          </font>
       </Button>
-      <Button layoutX="654.0" layoutY="428.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="194.0" text="Host">
+      <Button layoutX="583.0" layoutY="524.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="194.0" text="Host">
          <font>
             <Font size="40.0" />
          </font>
       </Button>
-      <Label layoutX="737.0" layoutY="204.0" text="Você é?" />
-      <Label layoutX="751.0" layoutY="376.0" text="ou" />
+      <Text fx:id="Vce" layoutX="-1.0" layoutY="111.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="5.0" text="Você é?" textAlignment="CENTER" wrappingWidth="1360.0" />
+      <Text fx:id="ou" fill="WHITE" layoutY="404.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="5.0" text="Ou" textAlignment="CENTER" wrappingWidth="1360.0" />
    </children>
 </AnchorPane>
