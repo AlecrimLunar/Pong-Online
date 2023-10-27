@@ -20,7 +20,7 @@ public class App extends Application{
         stage.setTitle("PONG");
         stage.show();
     }
-
+    
     public static void main(String[] args) {
         launch(args);
     }

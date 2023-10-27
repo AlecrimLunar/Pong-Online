@@ -2,12 +2,6 @@
     -fx-background-color: BLACK;
 }
 
-.label{
-    -fx-alignment: center;
-    -fx-font-family: Verdana;
-    -fx-text-fill: WHITE;
-}
-
 .button {
     -fx-background-color: BLACK;
     -fx-border-radius: 12px;
@@ -17,11 +11,18 @@
     -fx-font-size: 40px;
 }
 
-#error{
-    -fx-text-fill: RED;
+.rectangle{
+    -fx-fill: WHITE;
 }
 
-#controle{
-    -fx-background-color: BLACK;
-    -fx-border-color: BLACK;
+.texto{
+    -fx-fill: WHITE;
+    -fx-stroke: BLACK;
+    -fx-stroke-width: 5px;
+    -fx-font-size: 50px;
+    -fx-font-family: Verdana;
+}
+
+#cancelar{
+    -fx-font-size: 14px;
 }

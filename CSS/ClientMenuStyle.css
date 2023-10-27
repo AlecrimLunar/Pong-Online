@@ -2,6 +2,10 @@
     -fx-background-color: BLACK;
 }
 
+.rectangle{
+    -fx-fill: WHITE;
+}
+
 .label{
     -fx-alignment: center;
     -fx-font-family: Verdana;
@@ -17,11 +21,14 @@
     -fx-font-size: 40px;
 }
 
-#error{
-    -fx-text-fill: RED;
+.texto{
+    -fx-fill: WHITE;
+    -fx-stroke: BLACK;
+    -fx-stroke-width: 5px;
+    -fx-font-size: 50px;
+    -fx-font-family: Verdana;
 }
 
-#controle{
-    -fx-background-color: BLACK;
-    -fx-border-color: BLACK;
+#cancelar{
+    -fx-font-size: 14px;
 }
