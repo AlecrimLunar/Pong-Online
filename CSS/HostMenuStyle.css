@@ -6,15 +6,6 @@
     -fx-fill: WHITE;
 }
 
-.label{
-    -fx-font-family: Verdana;
-    -fx-text-fill: WHITE;
-}
-
-.error{
-    -fx-text-fill: RED;
-}
-
 .button {
     -fx-background-color: BLACK;
     -fx-border-radius: 12px;
@@ -30,6 +21,12 @@
     -fx-stroke-width: 5px;
     -fx-font-size: 50px;
     -fx-font-family: Verdana;
+}
+
+#error{
+    -fx-text-fill: RED;
+    -fx-stroke: BLACK;
+    -fx-stroke-width: 2px;
 }
 
 #cancelar{

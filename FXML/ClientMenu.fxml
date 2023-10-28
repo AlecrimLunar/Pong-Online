@@ -11,22 +11,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ClientController">
    <children>
-      <Rectangle height="175.0" layoutX="14.0" layoutY="409.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="20.0">
+      <Rectangle fx:id="Player1" height="175.0" layoutX="14.0" layoutY="409.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="20.0">
          <effect>
             <BoxBlur />
          </effect>
       </Rectangle>
-      <Rectangle height="175.0" layoutX="1326.0" layoutY="69.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="20.0">
-         <effect>
-            <BoxBlur />
-         </effect>
-      </Rectangle>
-      <Rectangle height="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1360.0">
-         <effect>
-            <BoxBlur />
-         </effect>
-      </Rectangle>
-      <Rectangle height="27.0" layoutY="741.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1360.0">
+      <Rectangle fx:id="Player2" height="175.0" layoutX="1326.0" layoutY="69.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="20.0">
          <effect>
             <BoxBlur />
          </effect>
@@ -71,6 +61,16 @@
             <BoxBlur />
          </effect>
       </Rectangle>
+      <Rectangle height="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1360.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
+      <Rectangle height="27.0" layoutY="741.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1360.0">
+         <effect>
+            <BoxBlur />
+         </effect>
+      </Rectangle>
       <Label layoutX="360.0" layoutY="333.0" text="IP:">
          <font>
             <Font size="30.0" />
@@ -89,10 +89,13 @@
             <Font size="50.0" />
          </font>
       </Text>
-      <Button layoutX="583.0" layoutY="455.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="194.0" text="Entrar">
+      <Button layoutX="583.0" layoutY="455.0" mnemonicParsing="false" onAction="#Entrar" prefHeight="84.0" prefWidth="194.0" text="Entrar">
          <font>
             <Font size="40.0" />
          </font>
       </Button>
+      <Label fx:id="IpError" layoutX="360.0" layoutY="420.0" styleClass="error" textFill="RED" />
+      <Label fx:id="PortaError" layoutX="830.0" layoutY="420.0" styleClass="error" textFill="RED" />
+      <TextField fx:id="controle" editable="false" layoutX="45.0" layoutY="55.0" prefHeight="5.0" prefWidth="0.0" />
    </children>
 </AnchorPane>

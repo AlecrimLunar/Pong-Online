@@ -74,7 +74,7 @@
             <Font size="40.0" />
          </font>
       </Button>
-      <Button layoutX="243.0" layoutY="348.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="194.0" text="Host">
+      <Button layoutX="243.0" layoutY="348.0" mnemonicParsing="false" onAction="#Host" prefHeight="84.0" prefWidth="194.0" text="Host">
          <font>
             <Font size="40.0" />
          </font>
