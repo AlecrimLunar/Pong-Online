@@ -1,7 +1,10 @@
 package Controllers;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
+import Controllers.Sockets.ClientSocket;
 import Controllers.Sockets.ServidorSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -56,17 +60,27 @@ public class HostController {
             return;
         }
         
-        ServidorSocket server = new ServidorSocket(port);
-        server.start();
+        File arquivo = new File("Temp/Port.txt");
+        try {
 
+            if (arquivo.createNewFile())
+                System.out.println("Arquivo criado com sucesso.");
+
+        } catch (IOException er) {
+            System.out.println("Ocorreu um erro ao criar o arquivo: " + er.getMessage());
+        } 
+        try (FileWriter escritor = new FileWriter("Temp/Port.txt")) {
+            escritor.write(port);
+        } catch (IOException er) {
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + er.getMessage());
+        }
+
+        //ClientSocket cs = new ClientSocket("localhost", port, true);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Game.fxml"));
+        
         try {
 
             root = loader.load();
-
-            GameController controller = loader.getController();
-            controller.setJogador1(true);
-
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             StackPane stackPane = new StackPane();
             stackPane.getChildren().add(root);
@@ -83,8 +97,10 @@ public class HostController {
 
         } catch (IOException er) {
             System.out.println(er.toString());
-            return;
         }
+        //cs.start();
+        ServidorSocket server = new ServidorSocket(port);
+        server.start();
     }
 
     void Sair(Stage stage) {

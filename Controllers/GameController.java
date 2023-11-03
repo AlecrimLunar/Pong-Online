@@ -4,14 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.Callable;
-
-
+import Controllers.Sockets.ClientSocket;
 import Controllers.Sockets.Threads.BolaThread;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
+
 
 public class GameController {
     
@@ -34,6 +34,15 @@ public class GameController {
 
     @FXML
     void initialize(){
+        String porta;
+        try (BufferedReader leitor = new BufferedReader(new FileReader("Temp/Nickname.txt"))) {
+            porta = leitor.readLine();
+        } catch (IOException er) {
+            System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
+            return;
+        }
+        ClientSocket cs = new ClientSocket("localhost", Integer.parseInt(porta), true);
+        cs.start();
 
         if(jogador1){
             Player1.setOnKeyPressed(new EventHandler<KeyEvent>() {

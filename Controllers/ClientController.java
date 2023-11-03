@@ -61,6 +61,7 @@ public class ClientController {
 
         String ip = IP.getText();
         int port = 0;
+        ClientSocket cs;
 
         try {
             port = Integer.parseInt(Porta.getText());
@@ -69,8 +70,7 @@ public class ClientController {
                 IpError.setText("Digite um Ip válido.");
                 return;
             } else {
-                ClientSocket cs = new ClientSocket(ip, port);
-                cs.start();
+                cs = new ClientSocket(ip, port, false);
             }
         } catch (NumberFormatException er) {
             PortaError.setText("Digite uma porta válida");
@@ -81,10 +81,6 @@ public class ClientController {
         try {
 
             root = loader.load();
-
-            GameController controller = loader.getController();
-            controller.setJogador1(false);
-
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             StackPane stackPane = new StackPane();
             stackPane.getChildren().add(root);
@@ -103,6 +99,8 @@ public class ClientController {
             System.out.println(er.toString());
             return;
         }
+
+        cs.start();
     }
 
     void Sair(Stage stage) {
@@ -113,7 +111,7 @@ public class ClientController {
         sairAlert.setContentText("Deseja mesma sair?");
 
         if (sairAlert.showAndWait().get() == ButtonType.OK) {
-            stage.close();
+            stage.close();;
         }
     }
 

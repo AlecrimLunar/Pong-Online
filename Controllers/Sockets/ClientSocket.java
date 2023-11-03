@@ -13,13 +13,20 @@ public class ClientSocket extends Thread{
     private String ip;
     private int porta;
     private Socket s;
+    private boolean jogador1;
 
-    public ClientSocket(String ip, int porta) {
+    public ClientSocket(String ip, int porta, boolean jogador1) {
         this.ip = ip;
         this.porta = porta;
+        this.jogador1 = jogador1;
     }
     
     public void run(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         try {
             s = new Socket(ip, porta);
         } catch (IOException e) {
@@ -30,6 +37,7 @@ public class ClientSocket extends Thread{
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Game.fxml"));
         GameController controller = loader.getController();
+        controller.setJogador1(jogador1);
 
         try{
             in = new DataInputStream(s.getInputStream());
