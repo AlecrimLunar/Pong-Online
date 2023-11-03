@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-
 import Controllers.Sockets.Threads.BolaThread;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,6 +34,25 @@ public class GameController {
     @FXML
     void initialize(){
 
+        try (BufferedReader leitor = new BufferedReader(new FileReader("Temp/Jogador1.txt"))) {
+
+            String linha = leitor.readLine();
+            if(linha.equalsIgnoreCase("true")){
+                setJogador1(true);
+            } else {
+                setJogador1(false);
+            }
+
+        } catch (IOException er) {
+            System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
+        }
+
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if(jogador1){
             Player1.setOnKeyPressed(new EventHandler<KeyEvent>() {
 

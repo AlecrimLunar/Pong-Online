@@ -1,7 +1,10 @@
 package Controllers;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
+import Controllers.Sockets.ClientSocket;
 import Controllers.Sockets.ServidorSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,10 +50,12 @@ public class HostController {
     }
 
     @FXML
-    void Iniciar(ActionEvent e) {
+    void Iniciar(ActionEvent e) throws IOException {
         int port = 0;
+        String s = "a";
         try {
-            port = Integer.parseInt(Porta.getText());
+            s = Porta.getText();
+            port = Integer.parseInt(s);
         } catch (NumberFormatException er) {
             Error.setText("Digite uma porta válida");
             return;
@@ -58,15 +63,30 @@ public class HostController {
         
         ServidorSocket server = new ServidorSocket(port);
         server.start();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Game.fxml"));
+        
+        File arquivo = new File("Temp/Jogador1.txt");
         try {
 
-            root = loader.load();
+            if (arquivo.createNewFile())
+                System.out.println("Arquivo criado com sucesso.");
 
-            GameController controller = loader.getController();
-            controller.setJogador1(true);
+        } catch (IOException er) {
+            System.out.println("Ocorreu um erro ao criar o arquivo: " + er.getMessage());
+        } 
 
+        try (FileWriter escritor = new FileWriter("Temp/Jogador1.txt")) {
+
+            escritor.write("true");
+
+        } catch (IOException er) {
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + er.getMessage());
+        }
+
+        ClientSocket cs = new ClientSocket("192.168.0.111", port);
+        
+        try {
+
+            root = FXMLLoader.load(getClass().getResource("/FXML/Game.fxml"));
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             StackPane stackPane = new StackPane();
             stackPane.getChildren().add(root);
@@ -83,8 +103,8 @@ public class HostController {
 
         } catch (IOException er) {
             System.out.println(er.toString());
-            return;
         }
+        cs.start();
     }
 
     void Sair(Stage stage) {
