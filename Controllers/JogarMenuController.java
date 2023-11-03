@@ -63,8 +63,7 @@ public class JogarMenuController {
     void Cancelar(ActionEvent e) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
         TextField textField = (TextField) root.lookup("#Nickname");
-        try (BufferedReader leitor = new BufferedReader(
-                new FileReader("C:/Users/Alecrim/Documents/GitHub/Pong-Online/Temp/Nickname.txt"))) {
+        try (BufferedReader leitor = new BufferedReader(new FileReader("C:/Users/Alecrim/Documents/GitHub/Pong-Online/Temp/Nickname.txt"))) {
 
             String linha;
             if ((linha = leitor.readLine()) != null) {
@@ -74,6 +73,7 @@ public class JogarMenuController {
         } catch (IOException er) {
             System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
         }
+
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(root);

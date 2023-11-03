@@ -1,8 +1,10 @@
 package Controllers;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
-import Controllers.Threads.ClientSocket;
+import Controllers.Sockets.ClientSocket;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -60,17 +62,29 @@ public class ClientController {
         IpError.setText("");
         String ip = IP.getText();
         int port = 0;
+        String nickname;
         try {
             port = Integer.parseInt(Porta.getText());
             
             if (ip.equals(controle.getText())) {
-                IpError.setText("Digite um IP diferente de controle.");
+                IpError.setText("Digite um Ip válido.");
+                return;
             } else {
-                ClientSocket cs = new ClientSocket(ip, port, "Nicolas");
+                try (BufferedReader leitor = new BufferedReader(new FileReader("C:/Users/Alecrim/Documents/GitHub/Pong-Online/Temp/Nickname.txt"))){
+                    
+                    nickname = leitor.readLine();
+
+                } catch (IOException er) {
+                    System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
+                    return;
+                }
+
+                ClientSocket cs = new ClientSocket(ip, port, nickname);
                 cs.start();
             }
         } catch (NumberFormatException er) {
             PortaError.setText("Digite uma porta válida");
+            return;
         }
     }
 

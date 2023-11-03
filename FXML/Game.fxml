@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
+   <children>
+      <Rectangle fx:id="Player1" height="107.0" layoutX="14.0" layoutY="331.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" styleClass="rectangle" width="20.0" />
+      <Rectangle fx:id="Player2" height="107.0" layoutX="1326.0" layoutY="331.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" styleClass="rectangle" width="20.0" />
+      <Rectangle arcHeight="5.0" height="76.0" layoutX="676.0" layoutY="42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="8.0" />
+      <Rectangle arcHeight="5.0" height="76.0" layoutX="676.0" layoutY="390.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="9.0" />
+      <Rectangle arcHeight="5.0" height="76.0" layoutX="676.0" layoutY="657.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="8.0" />
+      <Rectangle arcHeight="5.0" height="76.0" layoutX="676.0" layoutY="302.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="8.0" />
+      <Rectangle arcHeight="5.0" height="76.0" layoutX="676.0" layoutY="217.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="8.0" />
+      <Rectangle arcHeight="5.0" height="76.0" layoutX="676.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="8.0" />
+      <Rectangle arcHeight="5.0" height="76.0" layoutX="676.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="8.0" />
+      <Rectangle arcHeight="5.0" height="76.0" layoutX="676.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="8.0" />
+      <Rectangle fx:id="BarreiraTop" height="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1360.0" />
+      <Rectangle fx:id="BarreiraBai" height="27.0" layoutY="741.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1360.0" />
+      <Rectangle fx:id="Bola" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="670.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" styleClass="rectangle" width="20.0" />
+      <Label fx:id="NickPlayer1" layoutX="11.0" layoutY="-1.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

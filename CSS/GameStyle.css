@@ -1,0 +1,11 @@
+.root{
+    -fx-background-color: BLACK;
+}
+
+.label{
+    -fx-text-fill: BLACK;
+}
+
+.rectangle{
+    -fx-fill: WHITE;
+}

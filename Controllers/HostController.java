@@ -2,6 +2,7 @@ package Controllers;
 
 import java.io.IOException;
 
+import Controllers.Sockets.ServidorSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +53,32 @@ public class HostController {
             port = Integer.parseInt(Porta.getText());
         } catch (NumberFormatException er) {
             Error.setText("Digite uma porta válida");
+            return;
+        }
+        //ServidorSocket server = new ServidorSocket(port);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Game.fxml"));
+        try {
+
+            root = loader.load();
+            //NovoController novoController = loader.getController();
+            //novoController.setServidorSocket(server);
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            StackPane stackPane = new StackPane();
+            stackPane.getChildren().add(root);
+            Scene scene = new Scene(stackPane);
+            scene.getStylesheets().add(getClass().getResource("/CSS/GameStyle.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+
+            stage.setOnCloseRequest(event -> {
+            event.consume();
+            Sair(stage);
+            });
+
+        } catch (IOException er) {
+            System.out.println(er.toString());
+            return;
         }
     }
 
