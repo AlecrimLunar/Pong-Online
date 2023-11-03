@@ -45,7 +45,7 @@ public class MenuController {
 
         } else {
 
-            File arquivo = new File("C:/Users/Alecrim/Documents/GitHub/Pong-Online/Temp/Nickname.txt");
+            File arquivo = new File("Temp/Nickname.txt");
             try {
 
                 if (arquivo.createNewFile())
@@ -55,7 +55,7 @@ public class MenuController {
                 System.out.println("Ocorreu um erro ao criar o arquivo: " + er.getMessage());
             }
 
-            try (FileWriter escritor = new FileWriter("C:/Users/Alecrim/Documents/GitHub/Pong-Online/Temp/Nickname.txt")) {
+            try (FileWriter escritor = new FileWriter("Temp/Nickname.txt")) {
                 escritor.write(Nickname.getText());
             
             } catch (IOException er) {

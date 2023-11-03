@@ -22,7 +22,7 @@ public class App extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/Menu.fxml"));
         
         TextField textField = (TextField) root.lookup("#Nickname");
-        try (BufferedReader leitor = new BufferedReader(new FileReader("C:/Users/Alecrim/Documents/GitHub/Pong-Online/Temp/Nickname.txt"))) {
+        try (BufferedReader leitor = new BufferedReader(new FileReader("Temp/Nickname.txt"))) {
             
             String linha;
             if((linha = leitor.readLine()) != null) {
