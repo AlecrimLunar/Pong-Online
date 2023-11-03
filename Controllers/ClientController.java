@@ -1,7 +1,5 @@
 package Controllers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 import Controllers.Sockets.ClientSocket;
@@ -60,9 +58,10 @@ public class ClientController {
     void Entrar(ActionEvent e) {
         PortaError.setText("");
         IpError.setText("");
+
         String ip = IP.getText();
         int port = 0;
-        String nickname;
+
         try {
             port = Integer.parseInt(Porta.getText());
             
@@ -70,20 +69,38 @@ public class ClientController {
                 IpError.setText("Digite um Ip válido.");
                 return;
             } else {
-                try (BufferedReader leitor = new BufferedReader(new FileReader("C:/Users/Alecrim/Documents/GitHub/Pong-Online/Temp/Nickname.txt"))){
-                    
-                    nickname = leitor.readLine();
-
-                } catch (IOException er) {
-                    System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
-                    return;
-                }
-
-                ClientSocket cs = new ClientSocket(ip, port, nickname);
+                ClientSocket cs = new ClientSocket(ip, port);
                 cs.start();
             }
         } catch (NumberFormatException er) {
             PortaError.setText("Digite uma porta válida");
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Game.fxml"));
+        try {
+
+            root = loader.load();
+
+            GameController controller = loader.getController();
+            controller.setJogador1(false);
+
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            StackPane stackPane = new StackPane();
+            stackPane.getChildren().add(root);
+
+            Scene scene = new Scene(stackPane);
+            scene.getStylesheets().add(getClass().getResource("/CSS/GameStyle.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+
+            stage.setOnCloseRequest(event -> {
+            event.consume();
+            Sair(stage);
+            });
+
+        } catch (IOException er) {
+            System.out.println(er.toString());
             return;
         }
     }

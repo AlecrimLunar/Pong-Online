@@ -15,6 +15,8 @@ import javafx.scene.shape.Rectangle;
 
 public class GameController {
     
+    private boolean jogador1;
+
     @FXML
     private Rectangle Player1;
     @FXML
@@ -27,77 +29,81 @@ public class GameController {
     private Rectangle Bola;
     @FXML
     private Label NickPlayer1;
+    @FXML
+    private Label NickPlayer2;
 
     @FXML
     void initialize(){
 
-        Player1.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        if(jogador1){
+            Player1.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-            @Override
-            public void handle(KeyEvent e){
-                moverRetangulo(e, Player1);
-            }
-        });
+                @Override
+                public void handle(KeyEvent e){
+                    moverRetangulo(e, Player1);
+                }
+            }); Player1.setFocusTraversable(true);
+        } else {
+            Player2.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-        /*Player2.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent e) {
+                    moverRetangulo(e, Player2);
+                }
+            });Player2.setFocusTraversable(true);
+        }
+        if(jogador1){
+            Thread movimentoThread = new Thread(new Runnable() {
+                @Override
+                public void run(){
 
-            @Override
-            public void handle(KeyEvent e) {
-                moverRetangulo(e, Player2);
-            }
-        });*/
+                    boolean bateuX = false;
+                    boolean bateuY = false;
 
-        Player1.setFocusTraversable(true);
-        //Player2.setFocusTraversable(true);
+                    while(true){
 
-        Thread movimentoThread = new Thread(new Runnable() {
-            @Override
-            public void run(){
+                        Callable<double[]> callable = new BolaThread(Bola, bateuX, bateuY);
+                        double[] movimento;
 
-                boolean bateuX = false;
-                boolean bateuY = false;
+                        try {
 
-                while(true){
+                            movimento = callable.call();
+                            Bola.setX(movimento[0]);
+                            Bola.setY(movimento[1]);
+                            Thread.sleep(10);
 
-                    Callable<double[]> callable = new BolaThread(Bola, bateuX, bateuY);
-                    double[] movimento;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                    try {
-
-                        movimento = callable.call();
-                        Bola.setX(movimento[0]);
-                        Bola.setY(movimento[1]);
-                        Thread.sleep(10);
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    //y
-                    if(Bola.getBoundsInParent().intersects(BarreiraTop.getBoundsInParent())){
-                        bateuY = true;
-                    }
-                    if(Bola.getBoundsInParent().intersects(BarreiraBai.getBoundsInParent())){
-                        bateuY = false;
-                    }
-                    
-                    //x
-                    if(Bola.getBoundsInParent().intersects(Player1.getBoundsInParent())){
-                        bateuX = true;
-                    }
-                    if(Bola.getBoundsInParent().intersects(Player2.getBoundsInParent())){
-                        bateuX = false;
+                        //y
+                        if(Bola.getBoundsInParent().intersects(BarreiraTop.getBoundsInParent())){
+                            bateuY = true;
+                        }
+                        if(Bola.getBoundsInParent().intersects(BarreiraBai.getBoundsInParent())){
+                            bateuY = false;
+                        }
+                        
+                        //x
+                        if(Bola.getBoundsInParent().intersects(Player1.getBoundsInParent())){
+                            bateuX = true;
+                        }
+                        if(Bola.getBoundsInParent().intersects(Player2.getBoundsInParent())){
+                            bateuX = false;
+                        }
                     }
                 }
+            }); movimentoThread.start();
+        }
+
+        try (BufferedReader leitor = new BufferedReader(new FileReader("Temp/Nickname.txt"))){
+            if(jogador1){
+                NickPlayer1.setText(leitor.readLine());
+            } else {
+                NickPlayer2.setText(leitor.readLine());
             }
-        }); movimentoThread.start();
-
-        try (BufferedReader leitor = new BufferedReader(new FileReader("C:/Users/Alecrim/Documents/GitHub/Pong-Online/Temp/Nickname.txt"))){
-                    
-            NickPlayer1.setText(leitor.readLine());
-
         } catch (IOException er) {
             System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
             return;
@@ -146,5 +152,38 @@ public class GameController {
             default:
                 break;
         }
+    }
+
+    public void setJogador1(boolean jogador1){
+        this.jogador1 = jogador1;
+    }
+
+
+    public double[] getBolaPosition(){
+        double[] bolaPosition = new double[2];
+        bolaPosition[0] = Bola.getX();
+        bolaPosition[1] = Bola.getY();
+        return bolaPosition;
+    }
+
+    public void setPlayer(double position){
+        if(!jogador1){
+            Player1.setY(position);
+        } else {
+            Player2.setY(position);
+        }
+    }
+
+    public double getPlayerPosition(){
+        if(jogador1){
+            return Player1.getY();
+        } else {
+            return Player2.getY();
+        }
+    }
+
+    public void setBolaPosition(double x, double y){
+        Bola.setX(x);
+        Bola.setY(y);
     }
 }

@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 
 import Controllers.Sockets.Threads.ServerThread;
 
-public class ServidorSocket{
+public class ServidorSocket extends Thread{
     private int port;
 
 
@@ -30,12 +30,15 @@ public class ServidorSocket{
             return;
 
         }
-
         for(int i=1; i<=2; i++){
             try {
-
-                Socket ns = serverSocket.accept();
-                exec.execute(new ServerThread(ns));
+                if(i == 1){
+                    Socket ns = serverSocket.accept();
+                    exec.execute(new ServerThread(ns, true));
+                } else {
+                    Socket ns = serverSocket.accept();
+                    exec.execute(new ServerThread(ns, false));
+                }
 
             } catch (IOException e) {
                 System.out.println("Erro na conexão");

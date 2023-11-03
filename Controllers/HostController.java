@@ -55,17 +55,22 @@ public class HostController {
             Error.setText("Digite uma porta válida");
             return;
         }
-        //ServidorSocket server = new ServidorSocket(port);
+        
+        ServidorSocket server = new ServidorSocket(port);
+        server.start();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Game.fxml"));
         try {
 
             root = loader.load();
-            //NovoController novoController = loader.getController();
-            //novoController.setServidorSocket(server);
+
+            GameController controller = loader.getController();
+            controller.setJogador1(true);
+
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             StackPane stackPane = new StackPane();
             stackPane.getChildren().add(root);
+
             Scene scene = new Scene(stackPane);
             scene.getStylesheets().add(getClass().getResource("/CSS/GameStyle.css").toExternalForm());
             stage.setScene(scene);
