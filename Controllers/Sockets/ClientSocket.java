@@ -63,7 +63,7 @@ public class ClientSocket extends Thread {
                 e.printStackTrace();
                 return;
             }
-
+            System.out.println("Client revice: " + dados);
             dado = dados.split(" ");
             double[] position = new double[dado.length];
 
@@ -79,7 +79,7 @@ public class ClientSocket extends Thread {
             }
 
             String send = "" + controller.getPlayerPosition();
-
+            System.out.println("Client send: " + send);
             try {
                 out.writeUTF(send);
             } catch (IOException e) {

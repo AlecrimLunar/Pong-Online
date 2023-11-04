@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 public class ServerThread implements Runnable{
     private Socket s;
     private boolean player1;
+    private GameController controller;
 
     public ServerThread(Socket s, boolean player1) {
         this.s = s;
@@ -27,7 +28,18 @@ public class ServerThread implements Runnable{
         DataOutputStream out;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Game.fxml"));
-        GameController controller = loader.getController();
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar o arquivo FXML");
+            return;
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar o arquivo FXML: " + e.getMessage());
+            return;
+        }
+
+        controller = loader.getController();
         
         try{
             in = new DataInputStream(s.getInputStream());
@@ -35,12 +47,29 @@ public class ServerThread implements Runnable{
         } catch (Exception e){
             return;
         }
-
+        
+        boolean controle = true;
         while(true){
             String dados;
             double[] bolaPosition;
             double playerPosition;
-            String send = "";
+            StringBuilder send = new StringBuilder();
+
+            if(player1 && controle){
+
+                bolaPosition = controller.getBolaPosition();
+                send.append(bolaPosition[0] + " ");
+                send.append(bolaPosition[1] + " ");
+                playerPosition = controller.getPlayerPosition();
+                send.append(playerPosition);
+                System.out.println("Server send: " + send.toString());
+                try {
+                    out.writeUTF(send.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
 
             try {
                 dados = in.readUTF();
@@ -48,24 +77,26 @@ public class ServerThread implements Runnable{
                 e.printStackTrace();
                 return;
             }
-
+            System.out.println("Server revice: " + dados);
             double player = Double.parseDouble(dados);
             controller.setPlayer(player);
-
+            send = new StringBuilder();
             if(player1){
                 bolaPosition = controller.getBolaPosition();
-                send = send + bolaPosition[0] + " ";
-                send = send + bolaPosition[1] + " ";
+                send.append(bolaPosition[0] + " ");
+                send.append(bolaPosition[1] + " ");
             }
 
             playerPosition = controller.getPlayerPosition();
-            send = send + playerPosition;
-            
+            send.append(playerPosition);
+
+            System.out.println("Server send: " + send.toString());
             try {
-                out.writeUTF(send);
+                out.writeUTF(send.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            controle = false;
         }
     }
 }
