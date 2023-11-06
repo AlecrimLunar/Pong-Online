@@ -59,11 +59,13 @@ public class GameController {
             System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
         }
 
-        /*try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
+        /*
+         * try {
+         * Thread.sleep(2000);
+         * } catch (InterruptedException e) {
+         * e.printStackTrace();
+         * }
+         */
 
         if (jogador1) {
             Player1.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -96,7 +98,7 @@ public class GameController {
                     try (BufferedReader leitor = new BufferedReader(new FileReader("Temp/Porta.txt"))) {
 
                         port = Integer.parseInt(leitor.readLine());
-                        
+
                     } catch (IOException er) {
                         System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
                         return;
@@ -129,8 +131,6 @@ public class GameController {
 
                     boolean bateuX = false;
                     boolean bateuY = false;
-                    int pPlayer1 = 0;
-                    int pPlayer2 = 0;
                     double xInicial = Bola.getX();
                     double yInicial = Bola.getY();
 
@@ -168,15 +168,12 @@ public class GameController {
                             bateuX = false;
                         }
 
-                        //pontuação
-                        if(Bola.getBoundsInParent().intersects(GoalPlayer1.getBoundsInParent())){
-                            PPlayer1.setText("Pontos: " + (pPlayer1+=1));
+                        if (Bola.getBoundsInParent().intersects(GoalPlayer1.getBoundsInParent())) {
                             Bola.setX(xInicial);
                             Bola.setY(yInicial);
                             bateuX = false;
                         }
-                        if(Bola.getBoundsInParent().intersects(GoalPlayer2.getBoundsInParent())){
-                            PPlayer2.setText("Pontos: " + (pPlayer2+=1));
+                        if (Bola.getBoundsInParent().intersects(GoalPlayer2.getBoundsInParent())) {
                             Bola.setX(xInicial);
                             Bola.setY(yInicial);
                             bateuX = true;
@@ -187,31 +184,26 @@ public class GameController {
             movimentoThread.start();
         } else {
             Thread client = new Thread(new Runnable() {
-                
+
                 @Override
-                public void run(){
+                public void run() {
 
                     String ip = "192.168.0.111";
                     int port = 123;
 
                     try (BufferedReader leitor = new BufferedReader(new FileReader("Temp/Ip.txt"))) {
 
-                        int cont = 1;
-                        while (leitor!=null) {
-                            if(cont == 1){
-                                ip = leitor.readLine();
-                            } else {
-                                port = Integer.parseInt(leitor.readLine());
-                            }
-                        }
-                        
+                        ip = leitor.readLine();
+                        port = Integer.parseInt(leitor.readLine());
+
                     } catch (IOException er) {
                         System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
                     }
 
                     clientSocket(ip, port);
                 }
-            }); client.start();
+            });
+            client.start();
         }
 
         try (BufferedReader leitor = new BufferedReader(new FileReader("Temp/Nickname.txt"))) {
@@ -225,6 +217,24 @@ public class GameController {
             System.out.println("Ocorreu um erro ao ler o arquivo: " + er.getMessage());
             return;
         }
+        Thread pontuacao = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int pPlayer1 = 0;
+                int pPlayer2 = 0;
+
+                while (jogador1) {
+                    // pontuação
+                    if (Bola.getBoundsInParent().intersects(GoalPlayer1.getBoundsInParent())) {
+                        PPlayer1.setText("Pontos: " + (pPlayer1 += 1));
+                    }
+                    if (Bola.getBoundsInParent().intersects(GoalPlayer2.getBoundsInParent())) {
+                        PPlayer2.setText("Pontos: " + (pPlayer2 += 1));
+                    }
+                }
+            }
+        });
+        pontuacao.start();
 
     }
 
@@ -327,10 +337,11 @@ public class GameController {
                     Player2.setY(position);
                 }
             }
-        }); serverThread.start();
+        });
+        serverThread.start();
     }
 
-    private void clientSocket(String ip, int porta){
+    private void clientSocket(String ip, int porta) {
         Thread client = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -381,7 +392,7 @@ public class GameController {
                     String[] sd = dados.split(" ");
                     double[] dado = new double[sd.length];
 
-                    for(int i=0; i<sd.length; i++){
+                    for (int i = 0; i < sd.length; i++) {
                         dado[i] = Double.parseDouble(sd[i]);
                     }
 
@@ -399,7 +410,8 @@ public class GameController {
                 }
 
             }
-        }); client.start();
+        });
+        client.start();
     }
 
     public void setJogador1(boolean jogador1) {
