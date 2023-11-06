@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import Controllers.Sockets.ClientSocket;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -63,7 +62,6 @@ public class ClientController {
 
         String ip = IP.getText();
         int port = 0;
-        ClientSocket cs;
 
         try {
             port = Integer.parseInt(Porta.getText());
@@ -72,11 +70,31 @@ public class ClientController {
                 IpError.setText("Digite um Ip válido.");
                 return;
             } else {
-                cs = new ClientSocket(ip, port);
+
+                File endereco = new File("Temp/Ip.txt");
+                try {
+
+                    if (endereco.createNewFile())
+                    System.out.println("Arquivo criado com sucesso.");
+
+                } catch (IOException er) {
+                    System.out.println("Ocorreu um erro ao criar o arquivo: " + er.getMessage());
+                } 
+
+                try (FileWriter escritor = new FileWriter("Temp/Ip.txt")) {
+
+                    escritor.write(ip + "\n" + port);
+
+                } catch (IOException er) {
+                    System.out.println("Ocorreu um erro ao escrever no arquivo: " + er.getMessage());
+                }
+
             }
         } catch (NumberFormatException er) {
+
             PortaError.setText("Digite uma porta válida");
             return;
+
         }
 
         File arquivo = new File("Temp/Jogador1.txt");
@@ -120,7 +138,7 @@ public class ClientController {
             return;
         }
 
-        cs.start();
+        //cs.start();
     }
 
     void Sair(Stage stage) {

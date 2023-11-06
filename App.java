@@ -49,10 +49,9 @@ public class App extends Application{
 
     void Sair(Stage stage) {
         Alert sairAlert = new Alert(AlertType.CONFIRMATION);
-
         sairAlert.setTitle("Sair");
         sairAlert.setHeaderText("Você está saindo do Pong.");
-        sairAlert.setContentText("Deseja mesma sair?");
+        sairAlert.setContentText("Deseja mesmo sair?");
         
         if(sairAlert.showAndWait().get() == ButtonType.OK){
             stage.close();

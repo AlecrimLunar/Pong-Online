@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import Controllers.Sockets.ClientSocket;
-import Controllers.Sockets.ServidorSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,20 +52,19 @@ public class HostController {
         int port = 0;
         String s = "a";
         try {
+
             s = Porta.getText();
             port = Integer.parseInt(s);
+
         } catch (NumberFormatException er) {
             Error.setText("Digite uma porta válida");
             return;
         }
         
-        ServidorSocket server = new ServidorSocket(port);
-        server.start();
-        
-        File arquivo = new File("Temp/Jogador1.txt");
+        File Jogador1 = new File("Temp/Jogador1.txt");
         try {
 
-            if (arquivo.createNewFile())
+            if (Jogador1.createNewFile())
                 System.out.println("Arquivo criado com sucesso.");
 
         } catch (IOException er) {
@@ -82,7 +79,23 @@ public class HostController {
             System.out.println("Ocorreu um erro ao escrever no arquivo: " + er.getMessage());
         }
 
-        ClientSocket cs = new ClientSocket("192.168.0.111", port);
+        File porta = new File("Temp/Porta.txt");
+        try {
+
+            if (porta.createNewFile())
+                System.out.println("Arquivo criado com sucesso.");
+
+        } catch (IOException er) {
+            System.out.println("Ocorreu um erro ao criar o arquivo: " + er.getMessage());
+        } 
+
+        try (FileWriter escritor = new FileWriter("Temp/Porta.txt")) {
+
+            escritor.write(port + "");
+
+        } catch (IOException er) {
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + er.getMessage());
+        }
         
         try {
 
@@ -104,7 +117,7 @@ public class HostController {
         } catch (IOException er) {
             System.out.println(er.toString());
         }
-        cs.start();
+
     }
 
     void Sair(Stage stage) {

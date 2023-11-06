@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
    <children>
@@ -20,15 +20,27 @@
       <Rectangle fx:id="BarreiraTop" height="27.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1360.0" />
       <Rectangle fx:id="BarreiraBai" height="27.0" layoutY="741.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle" width="1360.0" />
       <Rectangle fx:id="Bola" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="670.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" styleClass="rectangle" width="20.0" />
-      <Label fx:id="NickPlayer1" layoutX="11.0" layoutY="-1.0">
+      <Rectangle fx:id="GoalPlayer2" arcHeight="5.0" arcWidth="5.0" height="715.0" layoutX="-4.0" layoutY="27.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="8.0" />
+      <Rectangle fx:id="GoalPlayer1" arcHeight="5.0" arcWidth="5.0" height="715.0" layoutX="1356.0" layoutY="27.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="8.0" />
+      <Text fx:id="PPlayer1" fill="WHITE" layoutX="528.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Pontos: 0">
          <font>
             <Font size="20.0" />
          </font>
-      </Label>
-      <Label fx:id="NickPlayer2" alignment="CENTER" contentDisplay="RIGHT" layoutX="1349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="0.0" textAlignment="RIGHT">
+      </Text>
+      <Text fx:id="PPlayer2" fill="WHITE" layoutX="750.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Pontos: 0">
          <font>
             <Font size="20.0" />
          </font>
-      </Label>
+      </Text>
+      <Text fx:id="NickPlayer1" layoutX="11.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="NickPlayer2" layoutX="1012.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" textAlignment="RIGHT" wrappingWidth="337.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
